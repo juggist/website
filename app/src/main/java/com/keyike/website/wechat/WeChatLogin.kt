@@ -20,4 +20,8 @@ class WeChatLogin : WeChatBase{
         }
         wexinApi.sendReq(req)
     }
+    interface Callback{
+        fun loginSuccess(code:String)
+        fun loginFail()
+    }
 }
