@@ -180,7 +180,10 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
 
         }
         ll_wechat.setOnClickListener {
-            WeChatInstance.login()
+//            WeChatInstance.login()
+//            WeChatInstance.shareImg(this)
+            WeChatInstance.shareWebPage(this)
+
         }
     }
 

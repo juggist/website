@@ -10,13 +10,16 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.gyf.immersionbar.ImmersionBar
+import com.keyike.website.bean.OrderBeans
 import com.keyike.website.bean.WrapData
 import com.keyike.website.http.BaseCallBack
 import org.xutils.HttpManager
 import org.xutils.common.Callback
 import org.xutils.http.RequestParams
 import org.xutils.x
-
+const val SP_NAME = "keyike"
+const val SP_ORDERS = "orders"
+const val SP_USER = "userId"
 abstract class BaseActivity : AppCompatActivity() {
     val http : HttpManager = x.http()
     val BASE_URL = "http://api.txtx365.com/index.php?/api/"
@@ -81,19 +84,66 @@ abstract class BaseActivity : AppCompatActivity() {
         }).start()
     }
     protected fun setUserSpData(userId:String){
-        val sp = this.getSharedPreferences("keyike", Context.MODE_PRIVATE)
-        sp.edit().putString("userId",userId).commit()
+        val sp = this.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+        sp.edit().putString(SP_USER,userId).commit()
     }
     protected fun getUserSpData():String?{
-        val sp = this.getSharedPreferences("keyike", Context.MODE_PRIVATE)
-        val token = sp.getString("userId","")
+        val sp = this.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+        val token = sp.getString(SP_USER,"")
         return token
     }
     protected fun clearUserSpData(){
-        val sp = this.getSharedPreferences("keyike", Context.MODE_PRIVATE)
-        sp.edit().clear()
+        val sp = this.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+        sp.edit().putString(SP_USER,"").commit()
     }
-    public fun convertRequestParams(url: String, queryParams: Map<String, String>?, formParams: Map<String, String>?): RequestParams {
+    protected fun setOrder(order:String,userId:String,payType:String){
+        val sp = this.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+        val ordersStr = sp.getString(SP_ORDERS, "")
+        var orders = Gson().fromJson(ordersStr, OrderBeans::class.java)
+        var exist = false
+        orders?.data?.let {
+            it.forEach { item ->
+                if(item.order == order && item.payType == payType &&item.userId == userId){
+                    exist = true
+                    return@let
+                }
+            }
+        }
+        if(!exist){
+            if(orders == null){
+                orders = OrderBeans(mutableListOf())
+            }
+            if(orders.data == null){
+                orders.data = mutableListOf()
+            }
+            orders.data!!.add(OrderBeans.OrderBean(order,userId,payType))
+            sp.edit().putString(SP_ORDERS,Gson().toJson(orders)).commit()
+        }
+    }
+    protected fun removeOrder(order:String,userId:String,payType:String){
+        val sp = this.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+        val ordersStr = sp.getString(SP_ORDERS, "")
+        var orders = Gson().fromJson(ordersStr, OrderBeans::class.java)
+        var index = -1
+        orders?.data?.let {
+            for (_index in it.indices){
+                if(it[_index].order == order && it[_index].payType == payType &&it[_index].userId == userId){
+                    index = _index
+                    return@let
+                }
+            }
+        }
+        if(index > -1){
+            orders.data!!.removeAt(index)
+            sp.edit().putString(SP_ORDERS,Gson().toJson(orders)).commit()
+        }
+    }
+    protected fun getOrders():OrderBeans?{
+        val sp = this.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
+        val ordersStr = sp.getString(SP_ORDERS, "")
+        return Gson().fromJson(ordersStr, OrderBeans::class.java)
+    }
+    fun convertRequestParams(url: String, queryParams: Map<String, String>?, formParams: Map<String, String>?): RequestParams {
         val params = RequestParams(url)
         params.connectTimeout = 30000
         var keys: Set<*>

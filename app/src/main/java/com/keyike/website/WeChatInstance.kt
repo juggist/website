@@ -1,5 +1,6 @@
 package com.keyike.website
 
+import android.content.Context
 import com.keyike.website.wechat.WeChatLogin
 import com.keyike.website.wechat.WeChatShare
 
@@ -16,6 +17,12 @@ object WeChatInstance {
     }
     fun shareText(){
         weChatShare.shareText()
+    }
+    fun shareImg(context: Context){
+        weChatShare.shareImg(context)
+    }
+    fun shareWebPage(context: Context){
+        weChatShare.shareWebPage(context)
     }
     private var loginCallbacks:MutableList<WeChatLogin.Callback> = listOf<WeChatLogin.Callback>().toMutableList()
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".TestActivity">
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加" />
+    <Button
+        android:id="@+id/btn_add2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加2" />
+    <Button
+        android:id="@+id/btn_add3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加3" />
+    <Button
+        android:id="@+id/btn_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发起请求" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除" />
+    <Button
+        android:id="@+id/btn_delete2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除2" />
+    <Button
+        android:id="@+id/btn_delete3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="删除3" />
+    <Button
+        android:id="@+id/btn_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取数据" />
+</LinearLayout>
