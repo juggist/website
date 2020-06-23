@@ -25,15 +25,20 @@ import java.util.*
  * @author juggist
  * @date 2020/5/21 22:19
  */
-class LoginActivity : BaseActivity(),WeChatLogin.Callback {
+class LoginActivity : BaseActivity(), WeChatLogin.Callback {
     var timer: Timer? = null
     var max_time = 0
     var loginType = 0
+    lateinit var androidId :String
     override fun getLayoutId(): Int = R.layout.activity_login
 
     override fun create() {
         WeChatInstance.addLoginCallback(this)
         initListener()
+        androidId = Settings.System.getString(
+            contentResolver,
+            Settings.System.ANDROID_ID
+        )
     }
 
     private fun initListener() {
@@ -72,28 +77,35 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
                         max_time = 0
                     }
                 }
-            }, 1000,1000)
-            post("${BASE_URL}registerVerify", hashMapOf<String,String>("token" to MyApplication.token!!,"mobile" to et_phone.text.toString()),object :DataCallback<SmsCodeBean>{
-                override fun dataSuccess(result: SmsCodeBean) {
-                    if(result.code == 1){
-                        Toast.makeText(this@LoginActivity, "发送验证码成功", Toast.LENGTH_LONG).show()
-                    }else{
-                        Toast.makeText(this@LoginActivity, "发送验证码失败", Toast.LENGTH_LONG).show()
+            }, 1000, 1000)
+            post(
+                "${BASE_URL}registerVerify",
+                hashMapOf<String, String>(
+                    "token" to MyApplication.token!!,
+                    "mobile" to et_phone.text.toString(),
+                    "device_code" to androidId
+                ),
+                object : DataCallback<SmsCodeBean> {
+                    override fun dataSuccess(result: SmsCodeBean) {
+                        if (result.code == 1) {
+                            Toast.makeText(this@LoginActivity, "发送验证码成功", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this@LoginActivity, "发送验证码失败:${result.message}", Toast.LENGTH_LONG).show()
+                            tv_timer.text = "发送验证码"
+                            timer?.cancel()
+                            max_time = 0
+                        }
+
+                    }
+
+                    override fun dataFail(msg: String) {
+                        Toast.makeText(this@LoginActivity, "发送验证码失败:$msg", Toast.LENGTH_LONG).show()
                         tv_timer.text = "发送验证码"
                         timer?.cancel()
                         max_time = 0
                     }
 
-                }
-
-                override fun dataFail(msg: String) {
-                    Toast.makeText(this@LoginActivity, "发送验证码失败", Toast.LENGTH_LONG).show()
-                    tv_timer.text = "发送验证码"
-                    timer?.cancel()
-                    max_time = 0
-                }
-
-            })
+                })
         }
         btn_login.setOnClickListener {
             if (loginType == 0) {
@@ -110,7 +122,8 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
                     hashMapOf(
                         "token" to MyApplication.token!!,
                         "mobile" to et_phone.text.toString(),
-                        "passwd" to et_psw.text.toString()
+                        "passwd" to et_psw.text.toString(),
+                        "device_code" to androidId
                     ),
                     object : DataCallback<LoginBean> {
                         override fun dataSuccess(result: LoginBean) {
@@ -121,12 +134,12 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 this@LoginActivity.finish()
                             } else {
-                                Toast.makeText(this@LoginActivity, "登录失败", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@LoginActivity, "登录失败:${result.message}", Toast.LENGTH_LONG).show()
                             }
                         }
 
                         override fun dataFail(msg: String) {
-                            Toast.makeText(this@LoginActivity, "登录失败", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@LoginActivity, "登录失败:$msg", Toast.LENGTH_LONG).show()
                         }
 
                     })
@@ -144,7 +157,8 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
                     hashMapOf(
                         "token" to MyApplication.token!!,
                         "mobile" to et_phone.text.toString(),
-                        "verify_code" to et_code.text.toString()
+                        "verify_code" to et_code.text.toString(),
+                        "device_code" to androidId
                     ),
                     object : DataCallback<LoginBean> {
                         override fun dataSuccess(result: LoginBean) {
@@ -155,12 +169,12 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 this@LoginActivity.finish()
                             } else {
-                                Toast.makeText(this@LoginActivity, "登录失败", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@LoginActivity, "登录失败:${result.message}", Toast.LENGTH_LONG).show()
                             }
                         }
 
                         override fun dataFail(msg: String) {
-                            Toast.makeText(this@LoginActivity, "登录失败", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@LoginActivity, "登录失败:$msg", Toast.LENGTH_LONG).show()
                         }
 
                     })
@@ -168,7 +182,7 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
         }
         btn_register.setOnClickListener {
             Log.d("website", "login")
-            startActivity(Intent(this,RegisterAvtivity::class.java))
+            startActivity(Intent(this, RegisterAvtivity::class.java))
         }
 
         iv_remember.setOnClickListener {
@@ -180,10 +194,7 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
 
         }
         ll_wechat.setOnClickListener {
-//            WeChatInstance.login()
-//            WeChatInstance.shareImg(this)
-            WeChatInstance.shareWebPage(this)
-
+            WeChatInstance.login()
         }
     }
 
@@ -195,28 +206,79 @@ class LoginActivity : BaseActivity(),WeChatLogin.Callback {
     }
 
     override fun loginSuccess(code: String) {
-        get("https://api.weixin.qq.com/sns/oauth2/access_token", hashMapOf<String,String>("appid" to WEXIN_APPID,"secret" to WEXIN_SECRET,"code" to code,"grant_type" to "authorization_code"),object :DataCallback<WeChatTokenBean>{
-            override fun dataSuccess(result: WeChatTokenBean) {
-                get("https://api.weixin.qq.com/sns/userinfo?", hashMapOf<String,String>("access_token" to result.access_token,"openid" to result.openid),object :DataCallback<WeChatLoginBean>{
-                    override fun dataSuccess(result: WeChatLoginBean) {
+        get(
+            "https://api.weixin.qq.com/sns/oauth2/access_token",
+            hashMapOf<String, String>(
+                "appid" to WEXIN_APPID,
+                "secret" to WEXIN_SECRET,
+                "code" to code,
+                "grant_type" to "authorization_code"
+            ),
+            object : DataCallback<WeChatTokenBean> {
+                override fun dataSuccess(result: WeChatTokenBean) {
+                    get(
+                        "https://api.weixin.qq.com/sns/userinfo?",
+                        hashMapOf<String, String>(
+                            "access_token" to result.access_token,
+                            "openid" to result.openid
+                        ),
+                        object : DataCallback<WeChatLoginBean> {
+                            override fun dataSuccess(weChatLoginBean: WeChatLoginBean) {
 
-                    }
+                                post(
+                                    "${BASE_URL}chkWeixinLogin",
+                                    hashMapOf(
+                                        "token" to MyApplication.token!!,
+                                        "device_code" to androidId,
+                                        "open_id" to weChatLoginBean.openid
+                                    ),
+                                    object : DataCallback<LoginBean> {
+                                        override fun dataSuccess(result: LoginBean) {
+                                            if (result.code == 1) {
+                                                setUserSpData(result.user_id)
+                                                MyApplication.user_id = result.user_id
+                                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                                this@LoginActivity.finish()
+                                                Toast.makeText(
+                                                    this@LoginActivity,
+                                                    "微信登录成功",
+                                                    Toast.LENGTH_LONG
+                                                ).show()
+                                            } else {
+                                                val intent = Intent(this@LoginActivity,BindWxActivity::class.java).also {
+                                                    it.putExtra("data",weChatLoginBean)
+                                                }
+                                                startActivity(intent)
+                                            }
+                                        }
 
-                    override fun dataFail(msg: String) {
-                        Toast.makeText(this@LoginActivity,"微信登录失败",Toast.LENGTH_LONG).show()
-                    }
+                                        override fun dataFail(msg: String) {
+                                            Toast.makeText(
+                                                this@LoginActivity,
+                                                "微信登录失败:$msg",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        }
 
-                })
-            }
+                                    })
+                            }
 
-            override fun dataFail(msg: String) {
-               Toast.makeText(this@LoginActivity,"微信登录失败",Toast.LENGTH_LONG).show()
-            }
+                            override fun dataFail(msg: String) {
+                                Toast.makeText(this@LoginActivity, "微信登录失败:$msg", Toast.LENGTH_LONG)
+                                    .show()
+                            }
 
-        })
+                        })
+                }
+
+                override fun dataFail(msg: String) {
+                    Toast.makeText(this@LoginActivity, "微信登录失败:$msg", Toast.LENGTH_LONG).show()
+                }
+
+            })
     }
 
     override fun loginFail() {
-        Toast.makeText(this,"微信登录失败 ",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "微信登录失败 ", Toast.LENGTH_LONG).show()
     }
 }

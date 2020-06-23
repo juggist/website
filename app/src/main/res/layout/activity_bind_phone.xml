@@ -43,21 +43,39 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-    <EditText
-        android:id="@+id/et_psw"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+    <RelativeLayout
+        android:id="@+id/rl_sms"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="22dp"
         android:layout_marginRight="25dp"
-        android:background="@drawable/et_unselect_bg"
-        android:hint="请输入验证码"
-        android:paddingLeft="19dp"
-        android:paddingRight="19dp"
-        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:background="@android:color/black"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_timer"
+            android:text="发送验证码"
+            android:textSize="16sp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
+        <EditText
+            android:id="@+id/et_code"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/et_unselect_bg"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:paddingLeft="19dp"
+            android:paddingRight="19dp"
+            android:layout_toLeftOf="@+id/tv_timer"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_status"
@@ -68,12 +86,14 @@
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_psw">
+        app:layout_constraintTop_toBottomOf="@+id/rl_sms">
 
-        <ImageView
+        <Button
+            android:id="@+id/btn_agree"
             android:layout_width="20dp"
+            android:background="@drawable/et_bg"
             android:layout_height="20dp"
-            android:src="@drawable/et_unselect_bg" />
+            android:src="@null" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,6 +104,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_register"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
