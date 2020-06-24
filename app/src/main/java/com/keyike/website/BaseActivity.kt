@@ -35,14 +35,16 @@ abstract class BaseActivity : AppCompatActivity() {
     protected inline fun<reified T> post(url:String,params:HashMap<String,String>,callback:DataCallback<T>){
        Thread(Runnable {
            val params = convertRequestParams(url,null,params)
+           Log.d("keyikeApp","url = $url ; params  = ${params.toJSONString()}")
            http.post(params,object : Callback.CommonCallback<String>{
                override fun onFinished() {
 
                }
 
                override fun onSuccess(result: String?) {
-                   Log.i("keyikeApp","onSuccess : $result")
+
                    val bean = Gson().fromJson(result,T::class.java)
+                   Log.i("keyikeApp","onSuccess : ${Gson().toJson(bean)}")
                    callback.dataSuccess(bean)
                }
 
@@ -67,8 +69,8 @@ abstract class BaseActivity : AppCompatActivity() {
                 }
 
                 override fun onSuccess(result: String?) {
-                    Log.i("keyikeApp","onSuccess : $result")
                     val bean = Gson().fromJson(result,T::class.java)
+                    Log.i("keyikeApp","onSuccess : ${Gson().toJson(bean)}")
                     callback.dataSuccess(bean)
                 }
 

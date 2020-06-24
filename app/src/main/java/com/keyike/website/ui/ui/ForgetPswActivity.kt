@@ -8,20 +8,14 @@ import android.widget.Toast
 import com.keyike.website.*
 import com.keyike.website.bean.LoginBean
 import com.keyike.website.bean.SmsCodeBean
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.activity_register.btn_register
-import kotlinx.android.synthetic.main.activity_register.et_code
-import kotlinx.android.synthetic.main.activity_register.et_phone
-import kotlinx.android.synthetic.main.activity_register.et_psw
-import kotlinx.android.synthetic.main.activity_register.tv_timer
 import java.util.*
 
-class RegisterAvtivity : BaseActivity() {
+class ForgetPswActivity: BaseActivity() {
     var timer: Timer? = null
     var max_time = 0
     lateinit var androidId :String
-    override fun getLayoutId(): Int = R.layout.activity_register
+    override fun getLayoutId(): Int = R.layout.activity_forget_psw
 
     override fun create() {
         btn_agree.isSelected = false
@@ -39,7 +33,7 @@ class RegisterAvtivity : BaseActivity() {
         btn_register.setOnClickListener {
             if (TextUtils.isEmpty(et_phone.text) || TextUtils.isEmpty(et_psw.text) || TextUtils.isEmpty(
                     et_confrim_psw.text
-                ) || TextUtils.isEmpty(et_name.text) || TextUtils.isEmpty(et_code.text)
+                ) || TextUtils.isEmpty(et_code.text)
             ) {
                 Toast.makeText(this, "请填写完整信息", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -63,7 +57,6 @@ class RegisterAvtivity : BaseActivity() {
                     "mobile" to et_phone.text.toString(),
                     "passwd" to et_psw.text.toString(),
                     "confirm_passwd" to et_confrim_psw.text.toString(),
-                    "child_name" to et_name.text.toString(),
                     "verify_code" to et_code.text.toString(),
                     "device_code" to androidId
                 ),
@@ -73,15 +66,15 @@ class RegisterAvtivity : BaseActivity() {
                             Log.i("keyikeApp", "register : $result")
                             setUserSpData(result.user_id)
                             MyApplication.user_id = result.user_id
-                            startActivity(Intent(this@RegisterAvtivity, MainActivity::class.java))
-                            this@RegisterAvtivity.finish()
+                            startActivity(Intent(this@ForgetPswActivity, MainActivity::class.java))
+                            this@ForgetPswActivity.finish()
                         } else {
-                            Toast.makeText(this@RegisterAvtivity, "注册失败:${result.message}", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@ForgetPswActivity, "修改密码失败:${result.message}", Toast.LENGTH_LONG).show()
                         }
                     }
 
                     override fun dataFail(msg: String) {
-                        Toast.makeText(this@RegisterAvtivity, "注册失败:$msg", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ForgetPswActivity, "修改密码失败:$msg", Toast.LENGTH_LONG).show()
                     }
 
                 })
@@ -119,10 +112,10 @@ class RegisterAvtivity : BaseActivity() {
                     DataCallback<SmsCodeBean> {
                     override fun dataSuccess(result: SmsCodeBean) {
                         if (result.code == 1) {
-                            Toast.makeText(this@RegisterAvtivity, "发送验证码成功", Toast.LENGTH_LONG)
+                            Toast.makeText(this@ForgetPswActivity, "发送验证码成功", Toast.LENGTH_LONG)
                                 .show()
                         } else {
-                            Toast.makeText(this@RegisterAvtivity, "发送验证码失败:${result.message}", Toast.LENGTH_LONG)
+                            Toast.makeText(this@ForgetPswActivity, "发送验证码失败:${result.message}", Toast.LENGTH_LONG)
                                 .show()
                             tv_timer.text = "发送验证码"
                             timer?.cancel()
@@ -132,7 +125,7 @@ class RegisterAvtivity : BaseActivity() {
                     }
 
                     override fun dataFail(msg: String) {
-                        Toast.makeText(this@RegisterAvtivity, "发送验证码失败:$msg", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@ForgetPswActivity, "发送验证码失败:$msg", Toast.LENGTH_LONG).show()
                         tv_timer.text = "发送验证码"
                         timer?.cancel()
                         max_time = 0

@@ -45,12 +45,12 @@ class SplashAvtivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
                         }
                         this@SplashAvtivity.finish()
                     }else{
-                        Toast.makeText(this@SplashAvtivity,"获取服务器信息失败，请点击屏幕重试",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@SplashAvtivity,"获取服务器信息失败，请点击屏幕重试:${result.message}",Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun dataFail(msg: String) {
-                    Toast.makeText(this@SplashAvtivity,"获取服务器信息失败，请点击屏幕重试",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SplashAvtivity,"获取服务器信息失败，请点击屏幕重试:$msg",Toast.LENGTH_LONG).show()
                 }
             })
     }
