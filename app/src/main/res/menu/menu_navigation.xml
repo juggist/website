@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_map"
+        android:icon="@mipmap/ic_launcher"
+        android:title="星宝贝" />
+
+    <item
+        android:id="@+id/menu_discover"
+        android:checked="true"
+        android:icon="@mipmap/ic_launcher"
+        android:title="星频道" />
+
+    <item
+        android:id="@+id/menu_car"
+        android:icon="@mipmap/ic_launcher"
+        android:title="星赛事" />
+    <item
+        android:id="@+id/menu_shop"
+        android:icon="@mipmap/ic_launcher"
+        android:title="星学院" />
+    <item
+        android:id="@+id/menu_mine"
+        android:icon="@mipmap/ic_launcher"
+        android:title="星商城" />
+
+</menu>

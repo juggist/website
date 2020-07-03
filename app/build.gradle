@@ -71,4 +71,9 @@ dependencies {
 
     // For developers using the Android Support Library
     implementation 'pub.devrel:easypermissions:2.0.1'
+
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.4'
+    implementation 'me.jessyan:autosize:1.2.1'
+
+    compile 'com.makeramen:roundedimageview:2.3.0'
 }

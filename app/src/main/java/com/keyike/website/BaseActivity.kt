@@ -23,11 +23,12 @@ const val SP_USER = "userId"
 abstract class BaseActivity : AppCompatActivity() {
     val http : HttpManager = x.http()
     val BASE_URL = "http://api.txtx365.com/index.php?/api/"
+    val BASE_PAY_URL = "http://test.txtx365.com/"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(getLayoutId())
-        ImmersionBar.with(this).statusBarColor(R.color.colorWhite).statusBarDarkFont(true).init()
+        ImmersionBar.with(this).statusBarColor(R.color.colorBlack).statusBarDarkFont(false).init()
         create()
     }
     abstract fun getLayoutId():Int

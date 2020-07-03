@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="55mm">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/component_banner" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:id="@+id/item_content"
+                android:layout_width="match_parent"
+                android:layout_height="164mm"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+
+                    android:layout_width="14mm"
+                    android:layout_height="14mm"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_qianyueModel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="40mm"
+                    android:layout_marginEnd="40mm"
+                    android:gravity="center"
+                    android:text="星频道"
+                    android:textColor="@android:color/black"
+                    android:textSize="78mm" />
+
+                <View
+                    android:layout_width="14mm"
+                    android:layout_height="14mm"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_babyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="60mm"
+                android:layout_marginTop="85mm"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_content">
+
+                <View
+                    android:layout_width="1mm"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_level1"
+                    android:layout_width="180mm"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="宝贝秀"
+                    android:textColor="@android:color/black"
+                    android:textSize="44mm" />
+
+                <View
+                    android:layout_width="1mm"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_level2"
+                    android:layout_width="180mm"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="秀场"
+                    android:textColor="@android:color/black"
+                    android:textSize="44mm" />
+
+                <View
+                    android:layout_width="1mm"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_level3"
+                    android:layout_width="180mm"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="品牌"
+                    android:textColor="@android:color/black"
+                    android:textSize="44mm" />
+
+                <View
+                    android:layout_width="1mm"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_level4"
+                    android:layout_width="180mm"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="公益"
+                    android:textColor="@android:color/black"
+                    android:textSize="44mm" />
+
+                <View
+                    android:layout_width="1mm"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_level5"
+                    android:layout_width="180mm"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="平面"
+                    android:textColor="@android:color/black"
+                    android:textSize="44mm" />
+
+                <View
+                    android:layout_width="1mm"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80mm"
+                android:layout_marginTop="50mm"
+                android:layout_marginEnd="80mm"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_babyTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include layout="@layout/component_page2" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

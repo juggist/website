@@ -1,92 +1,101 @@
 package com.keyike.website
 
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.gyf.immersionbar.ImmersionBar
 import com.keyike.website.pay.Pay
 import com.keyike.website.pay.PayType
+import com.keyike.website.ui.ui.fragment.*
 import com.keyike.website.webview.MyWebView
 import com.tencent.smtt.sdk.WebView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
-    val TAG = "webSite"
-    var startTime = 0L
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//        initListener()
-//        myWebView.loadUrl("http://www.txtx365.com")
-//
-//        PayInstance.initPay(this, PayType.WEXIN, object : Pay.Result {
-//            override fun paySuccess() {
-//                Log.d("Pay", "succsss")
-//            }
-//
-//            override fun payFail(msg: String) {
-//                Log.d("Pay", "fail : $msg")
-//            }
-//
-//            override fun payCancel() {
-//                Log.d("Pay", "cancel")
-//            }
-//        }, object : Pay.Exception {
-//            override fun unInstallClient() {
-//                Log.d("Pay", "unInstallClient")
-//            }
-//
-//            override fun unSupportPay() {
-//                Log.d("Pay", "unSupportPay")
-//            }
-//        })
-//    }
+    lateinit var fragments: MutableList<Fragment>
 
-    override fun getLayoutId(): Int  = R.layout.activity_main
+    override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun create() {
-        myWebView.loadUrl("http://www.txtx365.com")
+        mainBottom.enableAnimation(false)
+        mainBottom.enableItemShiftingMode(false)
+        mainBottom.enableShiftingMode(false)
+        fragments = mutableListOf(
+            BabyFragment(),
+            ChannelFragment(),
+            GameFragment(),
+            SchoolFragment(),
+            ShopFragment()
+        )
+        mainViewpager.apply {
+            isUserInputEnabled = false
+            offscreenPageLimit = 5
+            adapter =
+                object : FragmentStateAdapter(supportFragmentManager, this@MainActivity.lifecycle) {
+                    override fun createFragment(position: Int): Fragment {
+                        return fragments[position]
+                    }
+
+                    override fun getItemCount() = 5
+                }
+            setCurrentItem(1, false)
+        }
+        mainBottom.apply {
+            enableAnimation(false)
+            enableShiftingMode(false)
+            enableItemShiftingMode(false)
+
+            setTextSize(12f)
+
+            setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.menu_map -> {
+
+                        mainViewpager.setCurrentItem(0, false)
+                    }
+                    R.id.menu_discover -> {
+
+                        mainViewpager.setCurrentItem(1, false)
+                    }
+                    R.id.menu_car -> {
+
+                        mainViewpager.setCurrentItem(2, false)
+                    }
+                    R.id.menu_shop -> {
+
+                        mainViewpager.setCurrentItem(3, false)
+                    }
+                    R.id.menu_mine -> {
+
+                        mainViewpager.setCurrentItem(4, false)
+                    }
+                }
+                true
+            }
+
+            currentItem = 1
+
+            //去除长按吐司
+            bottomNavigationItemViews.forEach {
+                it.setOnLongClickListener { true }
+            }
+        }
+//        myWebView.loadUrl("http://www.txtx365.com")
     }
 
-//    private fun initListener() {
-//        btn.setOnClickListener { myWebView.nativeCallJs("nativeCallJs('android call js')") }
-//        btn2.setOnClickListener { WeChatInstance.login() }
-//        btn3.setOnClickListener { WeChatInstance.shareText() }
-//        btn.visibility = View.GONE
-//        btn2.visibility = View.GONE
-//        btn3.visibility = View.GONE
-//        myWebView.setWebViewLoadListener(object : MyWebView.WebViewLoadListener {
-//            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-//                Log.d(TAG, "onPageStarted ")
-//                startTime = System.currentTimeMillis()
-//            }
-//
-//            override fun onPageFinished(view: WebView?, url: String?) {
-//                Log.d(TAG, "onPageFinished ; 时间差" + (System.currentTimeMillis() - startTime))
-//            }
-//
-//            override fun onProgressChanged(view: WebView?, progress: Int) {
-//                Log.d(TAG, "onProgressChanged")
-//            }
-//
-//            override fun onReceivedTitle(view: WebView?, mtTitle: String?) {
-//                Log.d(TAG, "onReceivedTitle")
-//            }
-//
-//            override fun onReceivedError(code: Int) {
-//                Log.d(TAG, "onReceivedError")
-//            }
-//        })
-//    }
 
     override fun onBackPressed() {
-        if (myWebView.canGoBack()) {
-            myWebView.goBack()
-        } else {
-            super.onBackPressed()
-        }
+//        if (myWebView.canGoBack()) {
+//            myWebView.goBack()
+//        } else {
+//            super.onBackPressed()
+//        }
     }
 }

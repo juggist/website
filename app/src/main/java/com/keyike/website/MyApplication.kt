@@ -4,6 +4,8 @@ import android.app.Application
 import android.util.Log
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import me.jessyan.autosize.AutoSizeConfig
+import me.jessyan.autosize.unit.Subunits
 import org.xutils.x
 
 /**
@@ -15,6 +17,9 @@ class MyApplication : Application() {
         super.onCreate()
         x.Ext.init(this);
         wexinApi = WXAPIFactory.createWXAPI(applicationContext, WEXIN_APPID, false)
+        AutoSizeConfig.getInstance().unitsManager
+            .setSupportDP(false)
+            .setSupportSP(false).supportSubunits = Subunits.MM;
     }
     companion object{
         lateinit var wexinApi: IWXAPI

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/iv_content"
+        android:layout_width="340mm"
+        android:layout_height="340mm"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0mm"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36mm"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="2016年6月28日 - 1、android:orientation=vertical表示该布局下的元素垂直排列;2、android:layout_gravity=center_horizontal表示该布局在父布局里水平居中,此时其父布"
+        android:textColor="@android:color/black"
+        android:textSize="42mm"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/iv_content"
+        app:layout_constraintTop_toTopOf="@+id/iv_content" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0mm"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38mm"
+        android:ellipsize="end"
+        android:lines="3"
+        android:text="2016年6月28日 - 1、android:orientation=vertical表示该布局下的元素垂直排列;2、android:layout_gravity=center_horizontal表示该布局在父布局里水平居中,此时其父布"
+        android:textColor="@android:color/black"
+        android:textSize="32mm"
+        app:layout_constraintRight_toRightOf="@+id/tv_title"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_more"
+        android:layout_width="0mm"
+        android:layout_height="wrap_content"
+        android:text="MORE >"
+        android:textColor="@android:color/black"
+        android:textSize="38mm"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_content"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>
