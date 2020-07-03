@@ -76,4 +76,5 @@ dependencies {
     implementation 'me.jessyan:autosize:1.2.1'
 
     compile 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.yanzhenjie:permission:2.0.3'
 }

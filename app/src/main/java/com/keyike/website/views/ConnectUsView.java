@@ -14,11 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.keyike.website.R;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 
 import java.util.List;
 
@@ -105,9 +109,19 @@ public class ConnectUsView extends LinearLayout {
 
         @Override
         public void onClick(@NonNull View view) {
-            Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + telNums[type]));
-            context.startActivity(intent);
 
+            AndPermission.with(context).runtime().permission(Permission.CALL_PHONE).onDenied(new Action<List<String>>() {
+                @Override
+                public void onAction(List<String> data) {
+                    Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + telNums[type]));
+                    context.startActivity(intent);
+                }
+            }).onDenied(new Action<List<String>>() {
+                @Override
+                public void onAction(List<String> data) {
+                    Toast.makeText(context,"请打开电话权限",Toast.LENGTH_LONG).show();
+                }
+            }).start();
             Log.i("keyike", "SpanClick type = " + type);
         }
     }
