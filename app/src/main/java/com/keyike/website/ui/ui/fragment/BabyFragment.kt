@@ -24,6 +24,7 @@ class BabyFragment : BaseFragment() {
         rv.adapter =
             ChannelAdapter(listOf("1", "2", "3", "4", "5", "6", "7"), activity!!, TYPE_BABY)
         item1Change(0)
+        item2Change(0)
         initItem1Listener()
         initItem2Listener()
     }
@@ -81,13 +82,26 @@ class BabyFragment : BaseFragment() {
     }
     fun initItem2Listener() {
         tv_level1.setOnClickListener {
-
+            item2Change(0)
         }
         tv_level2.setOnClickListener {
-
+            item2Change(1)
         }
         tv_level3.setOnClickListener {
+            item2Change(2)
+        }
+    }
+    fun item2Change(index:Int){
+        tv_level1.setTextColor(resources.getColor(R.color.colorBlack))
+        tv_level2.setTextColor(resources.getColor(R.color.colorBlack))
+        tv_level3.setTextColor(resources.getColor(R.color.colorBlack))
 
+        if(index == 0){
+            tv_level1.setTextColor(resources.getColor(R.color.colorItemClick))
+        }else if(index == 1){
+            tv_level2.setTextColor(resources.getColor(R.color.colorItemClick))
+        }else if(index == 2) {
+            tv_level3.setTextColor(resources.getColor(R.color.colorItemClick))
         }
     }
 }
