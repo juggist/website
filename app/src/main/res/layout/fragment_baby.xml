@@ -71,7 +71,15 @@
                     android:textColor="@android:color/white"
                     android:textSize="46mm" />
             </LinearLayout>
-
+            <ImageView
+                android:id="@+id/img_content"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_content"
+                android:layout_width="match_parent"
+                android:scaleType="fitCenter"
+                android:layout_height="660mm"/>
             <LinearLayout
                 android:id="@+id/ll_babyTitle"
                 android:layout_width="wrap_content"
@@ -79,7 +87,7 @@
                 android:layout_marginTop="85mm"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_content">
+                app:layout_constraintTop_toBottomOf="@+id/img_content">
 
                 <View
                     android:layout_width="1mm"
@@ -129,14 +137,25 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="80mm"
-                android:layout_marginEnd="80mm"
+            <View
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_babyTitle"
+                android:id="@+id/v_left"
+                android:layout_width="80mm"
+                android:layout_height="1mm"/>
+            <View
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_babyTitle"
+                android:id="@+id/v_right"
+                android:layout_width="80mm"
+                android:layout_height="1mm"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="48mm"
+                android:id="@+id/rv"
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/v_left"
+                app:layout_constraintRight_toLeftOf="@+id/v_right"
                 app:layout_constraintTop_toBottomOf="@+id/ll_babyTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <include layout="@layout/component_page"/>

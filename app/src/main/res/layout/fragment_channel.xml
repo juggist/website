@@ -149,5 +149,8 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include layout="@layout/component_page2" />
+        <com.keyike.website.views.ConnectUsView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

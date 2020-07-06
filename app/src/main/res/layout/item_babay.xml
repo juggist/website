@@ -6,6 +6,7 @@
     android:background="@android:color/white"
     android:paddingTop="50mm"
     android:gravity="center_horizontal"
+
     android:orientation="vertical">
 
     <com.makeramen.roundedimageview.RoundedImageView

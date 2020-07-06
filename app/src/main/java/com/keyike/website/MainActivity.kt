@@ -45,7 +45,7 @@ class MainActivity : BaseActivity() {
 
                     override fun getItemCount() = 5
                 }
-            setCurrentItem(1, false)
+            setCurrentItem(0, false)
         }
         mainBottom.apply {
             enableAnimation(false)
@@ -53,8 +53,8 @@ class MainActivity : BaseActivity() {
             enableItemShiftingMode(false)
 
             setTextSize(12f)
-
             setOnNavigationItemSelectedListener {
+
                 when (it.itemId) {
                     R.id.menu_map -> {
 
@@ -80,7 +80,7 @@ class MainActivity : BaseActivity() {
                 true
             }
 
-            currentItem = 1
+            currentItem = 0
 
             //去除长按吐司
             bottomNavigationItemViews.forEach {

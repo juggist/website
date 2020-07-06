@@ -6,17 +6,19 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:background="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="145mm"
         android:gravity="center_vertical">
 
         <ImageButton
+            android:background="@android:color/black"
             android:id="@+id/ibtn_toBaby"
             android:layout_width="280mm"
             android:layout_height="86mm"
             android:layout_marginStart="158mm"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/header_sub_title" />
 
         <EditText
             android:id="@+id/et_babyName"
@@ -25,9 +27,10 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="40mm"
             android:background="@android:color/white"
-            android:drawableRight="@mipmap/ic_launcher"
+            android:drawableRight="@mipmap/search"
+            android:paddingRight="18mm"
             android:hint="宝贝名称"
-            android:paddingLeft="4mm"
+            android:paddingLeft="18mm"
             android:textSize="36mm" />
     </RelativeLayout>
     <ImageView
@@ -35,5 +38,5 @@
         android:layout_width="match_parent"
         android:layout_height="590mm"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/banner" />
 </LinearLayout>

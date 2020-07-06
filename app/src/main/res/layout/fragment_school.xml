@@ -133,5 +133,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_babyTitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.keyike.website.views.ConnectUsView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

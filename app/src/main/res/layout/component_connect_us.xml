@@ -1,96 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:background="@android:color/holo_red_dark"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:background="@android:color/white"
-        android:paddingLeft="80mm"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <View
+        android:background="@color/colorLine"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="80mm"
-        android:paddingBottom="80mm"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_tel_1"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_marginTop="64mm"
-            android:id="@+id/tv_tel_2"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_marginTop="64mm"
-            android:id="@+id/tv_place_meet"
-            android:textSize="44mm"
-            android:text="视镜地址:上海飞虹路525号8楼5258艺术空间"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_marginTop="64mm"
-            android:id="@+id/tv_emile_us"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+        android:layout_height="32mm"/>
     <LinearLayout
-        android:background="@android:color/white"
-        android:layout_marginTop="30mm"
-        android:paddingLeft="80mm"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:orientation="vertical"
+        android:paddingLeft="80mm"
         android:paddingTop="80mm"
-        android:paddingBottom="80mm"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_tel_3"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_marginTop="64mm"
-            android:id="@+id/tv_tel_4"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        android:paddingBottom="80mm">
 
         <TextView
+            android:id="@+id/tv_tel_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
+            android:id="@+id/tv_tel_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
+            android:id="@+id/tv_tel_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/address"
+            android:gravity="center_vertical"
+            android:text="视镜地址:上海飞虹路525号8楼5258艺术空间"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
+            android:id="@+id/tv_tel_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/mail"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+    </LinearLayout>
+    <View
+        android:background="@color/colorLine"
+        android:layout_width="match_parent"
+        android:layout_height="32mm"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="80mm"
+        android:paddingTop="80mm"
+        android:paddingBottom="80mm">
+
+        <TextView
             android:id="@+id/tv_tel_5"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
         <TextView
-            android:layout_marginTop="64mm"
             android:id="@+id/tv_tel_6"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
+            android:layout_height="wrap_content"
             android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
             android:id="@+id/tv_tel_7"
-            android:textSize="44mm"
-            android:textColor="@android:color/black"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
+            android:layout_height="wrap_content"
             android:layout_marginTop="64mm"
-            android:id="@+id/tv_emile"
-            android:textSize="44mm"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
             android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
+            android:id="@+id/tv_tel_8"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
+            android:id="@+id/tv_tel_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/telephone"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+        <TextView
+            android:id="@+id/tv_tel_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64mm"
+            android:drawableLeft="@mipmap/mail"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:textSize="44mm" />
+
+
+    </LinearLayout>
+    <View
+        android:background="@color/colorLine"
+        android:layout_width="match_parent"
+        android:layout_height="32mm"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="106mm">
+        <TextView
+            android:textSize="40mm"
+            android:textColor="@android:color/black"
+            android:text="沪ICP备09087108号-12"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+    <View
+        android:background="@color/colorLine"
+        android:layout_width="match_parent"
+        android:layout_height="32mm"/>
 </LinearLayout>
